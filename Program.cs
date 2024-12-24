@@ -1,4 +1,4 @@
-using OpenTK.Windowing.Desktop;
+﻿using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
@@ -70,7 +70,6 @@ class Program
 
             window.UpdateFrame += (FrameEventArgs e) =>
             {
-                int rodada = 0;
                 xBola += velocidadeBolaX;
                 yBola += velocidadeBolaY;
                 float ladoDireitoBola = xBola + tamanhoDaBola/2;
@@ -86,17 +85,16 @@ class Program
                      && chaoBola < yJogador2 + AlturaJogadores()/2
                      && TetoBola > yJogador2 - AlturaJogadores()/2)
                 {
-                    velocidadeBolaX = velocidadeBolaX + rodada;
                     velocidadeBolaX = -velocidadeBolaX;
-                    rodada++;
+                    velocidadeBolaX-=0.01f;
+                    
                 }
                 if( ladoEsquerdoBola < XdoJogador1()+ LarguraJogadores()/2
                     && chaoBola < yJogador1 + AlturaJogadores()/2
                     && TetoBola > yJogador1 - AlturaJogadores()/2)
                 {
-                    velocidadeBolaX = velocidadeBolaX + rodada;
                     velocidadeBolaX = -velocidadeBolaX;
-                    rodada++;
+                    velocidadeBolaX+=0.01f;
                 }
                 if (TetoBola > TetoTela)
                 {
@@ -115,7 +113,7 @@ class Program
 
             window.KeyDown += (KeyboardKeyEventArgs e) =>
             {
-                int velocidadeDoPlayer = 40;
+                int velocidadeDoPlayer = 60;
                 if(window.IsKeyDown(Keys.W))
                 {
                     yJogador1 += velocidadeDoPlayer;
